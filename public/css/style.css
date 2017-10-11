@@ -1,0 +1,9 @@
+@media screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1280px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+
+  	.panel.panel-form .panel-heading h2 {font-size: 260% !important }
+    .panel.panel-form .panel-heading h1{ font-size: 375%}
+    .wrapper.wrapper-indicators.carousel-indicators .indicator{ min-width: 75px; max-width: 75px;}
+}
