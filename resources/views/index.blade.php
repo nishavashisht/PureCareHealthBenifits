@@ -51,6 +51,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a class="navbar-brand" href="">
                 <img alt="Pure Care Solutions" src="img/logo.png" />
             </a>
+            <a href="download">download</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -115,7 +116,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- Form start -->
 
-        <form class="form-horizontal" id="mtr_healthbenefits_form" action="" method="post">
+        <form class="form-horizontal" id="mtr_healthbenefits_form" action="AjaxCallURI" method="post">
+
+        <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">    
             <div class="form-group">
                 <div class="col-sm-12">
                     <input type="email" class="form-control effect_slap" placeholder="Email address" name="txtEmail" id="txtEmail" />
@@ -136,7 +139,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
             </div>
-            <button type="button" id="set-up-account" class="btn btn-green btn-block">Try it 30 days free - Save now</button>
+            <button type="submit" id="set-up-account" class="btn btn-green btn-block">Try it 30 days free - Save now</button>
              
              
 
@@ -1016,8 +1019,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <h1 class="blue_underline_header">Payment Information</h1>
                         </div>
                         <div class="panel-body">
-                            <form id="mtr_healthbenefits_form" action="/rf02fst/@@action@@" method="post">
-
+                            <form id="mtr_healthbenefits_form" action="myCallURI" method="post">
+                                <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+                                <input type="hidden" name="txtEmailAddress1" id="txtEmailAddress1" />
                                 <div class="form-group">
                                     <div class="col-md-6">
                                         <label>We Accept</label>
@@ -1403,7 +1407,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     </div>
                                     <div class="col-md-9">
                                         
-                                        <button type="button" id="continue-2" class="btn btn-green-stripe btn-block btn-lg">Start My Trial</button></a>
+                                        <button type="submit" id="continue-2" class="btn btn-green-stripe btn-block btn-lg">Start My Trial</button></a>
                                     </div>
                                 </div>
                             </form>

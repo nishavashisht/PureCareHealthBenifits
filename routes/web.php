@@ -26,5 +26,8 @@ Route::get('/register',function(){
 });
 
 Route::post('myAjaxCallURI',array('uses'=>'UserRegistration@postRegister'));
+Route::post('myCallURI',array('uses'=>'UserRegistration@postPayment'));
+Route::post('AjaxCallURI',array('uses'=>'UserRegistration@mailvalid'));
+Route::get('download', 'CountryController@download');
 
 

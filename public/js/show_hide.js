@@ -1,6 +1,6 @@
 /*Step one js starts here*/
 jQuery(document).ready(function(){
-    jQuery("#set-up-account").click(function(){
+    jQuery("#set-up-account").click(function(event){
         var x = document.getElementById("txtEmail").value;
         var atpos = x.indexOf("@");
         var dotpos = x.lastIndexOf(".");
@@ -9,11 +9,13 @@ jQuery(document).ready(function(){
             var emailText = "Please enter your email address.";
             document.getElementById("emailValidationError").innerHTML = emailText;
 			document.getElementById("txtEmail").focus();
+			event.preventDefault();
         }
         else if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
             var emailText2 = "Please enter a valid email address.";
             document.getElementById("emailValidationError").innerHTML = emailText2;
 			document.getElementById("txtEmail").focus();
+			event.preventDefault();
         }
         else if(document.getElementById("txtFirstName").value == '')
         {
@@ -21,6 +23,7 @@ jQuery(document).ready(function(){
             document.getElementById("fnameValidationError").innerHTML = fnameText;
             document.getElementById("emailValidationError").style.display = "none";
 			document.getElementById("txtFirstName").focus();
+			event.preventDefault();
         }
         else if(document.getElementById("txtLastName").value == '')
         {
@@ -29,20 +32,41 @@ jQuery(document).ready(function(){
             document.getElementById("fnameValidationError").style.display = "none";
 			document.getElementById("emailValidationError").style.display = "none";
 			document.getElementById("txtLastName").focus();
+        	event.preventDefault();
         }
-        else
+        else if(document.getElementById("txtLastName").value != '' && document.getElementById("txtFirstName").value != '' && document.getElementById("txtEmail").value != '')
         {
+
+           event.preventDefault();
+        jQuery.ajax({
+        url: '/AjaxCallURI',
+        type: 'post',
+        data: jQuery('form').serialize(),
+        success: function (response) {
+           
+           if(response=="User email Already Exist")   
+           {
+            $( '#emailValidationError' ).html(response);
+            document.getElementById("emailValidationError").style.display = "block";
+         
+           }
+           else
+           {
             jQuery("#Myaccount").slideUp();
             jQuery("#shadow-box").show();
             jQuery("#about_us").hide();
-
             dataLayer.push({'event':'gtm.stepOneFormSubmit'});
-
             document.getElementById("firstName").value = document.getElementById("txtFirstName").value;
-			document.getElementById("lastName").value = document.getElementById("txtLastName").value;
-			document.getElementById("txtEmailAddress").value = document.getElementById("txtEmail").value;
-		}
+            document.getElementById("lastName").value = document.getElementById("txtLastName").value;
+            document.getElementById("txtEmailAddress").value = document.getElementById("txtEmail").value;
+           }
+          }
     });
+    }
+else{
+
+}
+	});
 
 	jQuery("#continue-1").click(function(event){
 		
@@ -95,28 +119,44 @@ jQuery(document).ready(function(){
 		else
 		{
 			//var userFirstName = document.getElementById("firstName").value;
-			document.getElementById("userFirstName").innerHTML = document.getElementById("firstName").value;
-			jQuery("#shadow-box").slideUp();
-			jQuery("#shadow-box-2").show();
-			jQuery("#Myaccount").hide();
-			jQuery("#rss-summary").show();
-            jQuery("#rss-disclaimer").hide();
-            jQuery("#rss-disclaimer-direct").hide();
-            jQuery("#rss-disclosure-dental").hide();
+			//document.getElementById("userFirstName").innerHTML = document.getElementById("firstName").value;
+			//jQuery("#shadow-box").slideUp();
+			//jQuery("#shadow-box-2").show();
+			//jQuery("#Myaccount").hide();
+			//jQuery("#rss-summary").show();
+            //jQuery("#rss-disclaimer").hide();
+            //jQuery("#rss-disclaimer-direct").hide();
+            //jQuery("#rss-disclosure-dental").hide();
 
             dataLayer.push({'event':'gtm.stepTwoFormSubmit'});
+
+
 		}
 		event.preventDefault();
-        $.ajax({
+        jQuery.ajax({
         url: 'http://127.0.0.1:8000/myAjaxCallURI',
         type: 'post',
         data: jQuery('form').serialize(),
-        success: function( _response ){
-         
-        },
-        error: function( _response ){
-           
-        }
+         success: function (response) {
+		   
+		  
+		   if(response=="User email Already Exist")
+		     {
+		     	jQuery( '#emailValidationDisplay' ).html(response);	
+		        	
+		     }
+
+		      else
+		   {
+		    	jQuery("#shadow-box").slideUp();
+				jQuery("#shadow-box-2").show();
+				jQuery("#Myaccount").hide();
+				jQuery("#rss-summary").show();
+	            jQuery("#rss-disclaimer").hide();
+	            jQuery("#rss-disclaimer-direct").hide();
+	            jQuery("#rss-disclosure-dental").hide();
+		   }
+		  }
     });
     });
 
@@ -135,7 +175,7 @@ jQuery(document).ready(function(){
 		}
 	});
 
-	jQuery("#continue-2").click(function(){
+	jQuery("#continue-2").click(function(e){
 		if(document.getElementById("txtCCNumber").value == '')
         {
             var ccText = "Please enter your credit card number.";
@@ -199,7 +239,21 @@ jQuery(document).ready(function(){
 			jQuery("#Myaccount").hide();
 			jQuery("#shadow-box-1").hide();
 			dataLayer.push({'event':'gtm.paymentSubmit'});
+			document.getElementById("txtEmailAddress1").value = document.getElementById("txtEmailAddress").value;
 		}
+
+		e.preventDefault();
+        $.ajax({
+        url: 'http://127.0.0.1:8000/myCallURI',
+        type: 'post',
+        data: jQuery('form').serialize(),
+        success: function( _response ){
+         
+        },
+        error: function( _response ){
+           
+        }
+    });
     });
 
 
