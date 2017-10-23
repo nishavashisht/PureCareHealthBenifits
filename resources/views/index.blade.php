@@ -1023,6 +1023,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
                                 <input type="hidden" name="txtEmailAddress1" id="txtEmailAddress1" />
                                 <div class="form-group">
+
+                                    
                                     <div class="col-md-6">
                                         <label>We Accept</label>
                                         <div>

@@ -29,10 +29,11 @@ class CreateRegUserTable extends Migration
             $table->string('shipp_city');
             $table->string('shipp_state');
             $table->string('shipp_zipcode');
-                              
-            $table->timestamps();
+             $table->timestamps();
         });
     }
+
+
 
     /**
      * Reverse the migrations.

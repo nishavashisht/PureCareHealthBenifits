@@ -61,7 +61,7 @@ class UserRegistration extends Controller {
       
       public function postPayment(Request $request){
       
-      /* billing address */
+      /* Credit Card Number */
 
       
        $_SESSION['credit_card'] = substr($request->txtCCNumber, -4);
