@@ -17,7 +17,7 @@ class UserRegistration extends Controller {
     $input['email'] = Input::get('txtEmail');
 
     // Must not already exist in the `email` column of `users` table
-    $rules = array('email' => 'unique:users,email');
+    $rules = array('email' => 'unique:reg_user,email');
 
     $validator = Validator::make($input, $rules);
 
@@ -49,8 +49,8 @@ class UserRegistration extends Controller {
       //Retrieve the password input field
      $_SESSION['lname'] = $request->lastName;
        
-     \DB::table('users')->insert(array(
-      array('email' =>  $_SESSION['username'], 'fname' =>  $_SESSION['fname'], 'lname' =>  $_SESSION['lname'], 'phone' =>  $_SESSION['phone'], 'created_at'=> new DateTime(),'bill_address1' =>'', 'bill_address2' =>'', 'bill_city' =>'', 'bill_state' =>'', 'bill_zipcode' =>'', 'shipp_address1' =>'', 'shipp_address2' =>'', 'shipp_city' =>'', 'shipp_state' =>'', 'shipp_zipcode' =>'' )
+     \DB::table('reg_user')->insert(array(
+      array('email' =>  $_SESSION['username'], 'fname' =>  $_SESSION['fname'], 'lname' =>  $_SESSION['lname'], 'phone' =>  $_SESSION['phone'], 'credit_card' =>'', 'bill_address1' =>'', 'bill_address2' =>'', 'bill_city' =>'', 'bill_state' =>'', 'bill_zipcode' =>'', 'shipp_address1' =>'', 'shipp_address2' =>'', 'shipp_city' =>'', 'shipp_state' =>'', 'shipp_zipcode' =>'' )
 
 
 
@@ -60,7 +60,14 @@ class UserRegistration extends Controller {
 
       
       public function postPayment(Request $request){
+      
       /* billing address */
+
+      
+       $_SESSION['credit_card'] = substr($request->txtCCNumber, -4);
+
+      /* billing address */
+    
       $_SESSION['address1'] = $request->txtBillingAddressOne;
       $_SESSION['address2'] = $request->txtBillingAddressTwo;
       $_SESSION['city'] = $request->txtBillingCity;
@@ -80,7 +87,7 @@ class UserRegistration extends Controller {
       //$mytime = new DateTime();
 
 
-     \DB::table('users')->where('email',$_SESSION['email1'])->update(array('bill_address1' =>  $_SESSION['address1'],'bill_address2' =>$_SESSION['address2'],'bill_city' =>$_SESSION['city'],'bill_zipcode' =>$_SESSION['zipcode'],'bill_state' =>$_SESSION['state'], 'shipp_address1' =>  $_SESSION['ship_address1'],'shipp_address2' =>$_SESSION['ship_address2'],'shipp_city' =>$_SESSION['ship_city'],'shipp_zipcode' =>$_SESSION['ship_zipcode'],'shipp_state' =>$_SESSION['ship_state'])
+     \DB::table('reg_user')->where('email',$_SESSION['email1'])->update(array( 'credit_card' => $_SESSION['credit_card'],'bill_address1' =>  $_SESSION['address1'],'bill_address2' =>$_SESSION['address2'],'bill_city' =>$_SESSION['city'],'bill_zipcode' =>$_SESSION['zipcode'],'bill_state' =>$_SESSION['state'], 'shipp_address1' =>  $_SESSION['ship_address1'],'shipp_address2' =>$_SESSION['ship_address2'],'shipp_city' =>$_SESSION['ship_city'],'shipp_zipcode' =>$_SESSION['ship_zipcode'],'shipp_state' =>$_SESSION['ship_state'])
         );  // update the record in the DB. 
       
 
