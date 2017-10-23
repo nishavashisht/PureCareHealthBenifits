@@ -51,7 +51,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a class="navbar-brand" href="">
                 <img alt="Pure Care Solutions" src="img/logo.png" />
             </a>
-            <a href="download">download</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -1024,7 +1023,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <input type="hidden" name="txtEmailAddress1" id="txtEmailAddress1" />
                                 <div class="form-group">
 
-                                    
+
                                     <div class="col-md-6">
                                         <label>We Accept</label>
                                         <div>
